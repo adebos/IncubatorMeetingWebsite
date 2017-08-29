@@ -1,0 +1,19 @@
+{
+  "name": "inkubatorTest",
+  "description": "inkubatorTest BORIS",
+  "main": "index.js",
+  "authors": [
+    "adebos"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test"
+  ],
+  "dependencies": {
+    "reset-css": "^2.2.1"
+  }
+}

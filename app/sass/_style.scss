@@ -1,0 +1,525 @@
+@import "settings";
+
+// fonts
+
+$Arial: 'Arial', sans-serif;
+
+//оформление надписей
+//@mixin font-type ($color, $font-family, $font-size, $font-weight, $line-height, $letter-spacing)
+
+/* colors */
+$color-brand: #7201eb;
+$color-white: #ffffff;
+$color-gray: #eeeeee;
+$color-gray-border: #dddddd;
+$color-orange: #ff7f00;
+$color-red: #ff0000;
+$color-text: #777777;
+$color-online: #71E800;
+
+// preloader
+.preloader {}
+
+// GLOBAL STYLE
+.button {
+    &:hover {text-decoration: none;}
+    &:active {}
+    &:after {}
+}
+a {
+	color: $color-text; text-decoration: none;
+
+	&:hover {text-decoration: underline;}
+	&:active {}
+}
+.line {
+	padding: 5px 0;
+	border-top: 2px solid $color-gray;
+}
+
+
+// APPLICATION
+body {background-color: $color-gray;}
+.app {
+	@include font-type($color-text, $Arial, 12px, 400, 20px);
+	display: flex; width: 1000px; padding: 0 10px; margin: 0 auto;
+}
+
+//section category and other people
+.left-side {
+	flex: 3; padding: 10px;
+
+	//logo
+	.logo {
+		width: 100%; height: 200px;
+	}
+	//category
+	.menu {
+		padding: 20px;
+
+		.line {border-color: $color-gray-border;}
+
+		//navigation
+		ul {
+			li {
+				padding: 5px 0;
+
+				&.active {
+					a {color: $color-brand;}
+				}
+				a {
+					i {
+						display: inline-block; width: 15px; height: 15px; margin-right: 20px;
+
+						img {vertical-align: text-bottom;}
+					}
+				}
+			}
+		}
+	}
+	//other people
+	.people {
+		margin-top: 15px;
+
+		p {
+			padding: 5px 10px;
+			background-color: $color-white; border-radius: 10px;
+		}
+		ul {
+			display: flex; flex-wrap: wrap; margin-top: 15px;
+
+			li {
+				&:first-child {margin-left: 65px;}
+
+				a {
+					display: block;
+					position: relative;
+
+					&:after {
+						content: "";
+						width: 10px; height: 10px;
+						position: absolute; bottom: 10px; right: 8px;
+						background-color: $color-online; border-radius: 50%;
+					}
+					img {
+						width: 60px; margin: 3px;
+						border-radius: 50%;
+					}
+				}
+			}
+		}
+	}
+}
+//main section
+.content {
+	flex: 10;
+	background-color: $color-white; border-right: 1px solid $color-gray-border;
+		border-left: 1px solid $color-gray-border;
+
+	//header with username
+	.header {
+		display: flex; align-items: center; padding: 20px 10px;
+
+		.button-block {
+			position: relative; z-index: 3;
+
+			& + .button-block {margin-left: 10px;}
+
+			a {
+				&:hover + span {
+					opacity: 1;
+					z-index: 5;
+					transition: opacity .2s linear;
+				}
+
+				svg {
+					cursor: pointer;
+					transition: transform .1s linear;
+
+					.icon {ellipse, path, line {transition: fill .2s linear, stroke .2s linear;}}
+
+					&:hover {
+						.icon-like,
+						.icon-dislike,
+						.icon-superlike,
+						.icon-profile {path, line {fill: $color-white;}}
+
+						.icon-like {ellipse {fill: $color-orange;} path {fill: $color-orange; stroke: $color-white;}}
+						.icon-dislike {ellipse {fill: $color-brand;} line {stroke: $color-white;}}
+						.icon-superlike {
+							ellipse {fill: $color-orange;} path {fill: $color-orange; stroke: $color-white;}
+							.border-orange {stroke: $color-orange;}
+							.border-white {stroke: $color-white;}
+						}
+						.icon-profile {ellipse {fill: $color-text;}}
+					}
+					&:active {transform: scale(1.25);}
+
+					g.nocheck {
+						&.icon-like {path {fill: $color-white;}}
+						&.icon-dislike {line {stroke: $color-red;}}
+						&.icon-superlike {path {fill: $color-white;}}
+						&.icon-profile {ellipse {fill: $color-text;}}
+
+						&:hover {
+							&.icon-like,
+							&.icon-dislike,
+							&.icon-superlike,
+							&.icon-profile {path, line {fill: $color-white;}}
+
+							&.icon-like {ellipse {fill: $color-orange;} path {stroke: $color-orange;}}
+							&.icon-dislike {ellipse {fill: $color-brand;}}
+							&.icon-superlike {
+								ellipse {fill: $color-orange;} path {stroke: $color-orange;}
+								.border-orange {stroke: $color-orange;}
+								.border-white {stroke: $color-white;}
+							}
+							&.icon-profile {ellipse {fill: $color-text;}}
+						}
+					}
+				}
+			}
+			span {
+				color: $color-white; opacity: 0; white-space: nowrap;
+				padding: 4px;
+				position: absolute; top: 110%; left: 50%; z-index: -1;
+				background-color: rgba(0, 0, 0, 0.7);
+				transform: translateX(-50%);
+
+				&:after {
+					content: '';
+					display: block;
+					position: absolute; top: -14px; left: 50%;
+					border: 7px solid transparent; border-bottom-color: rgba(0, 0, 0, 0.7);
+					transform: translateX(-50%);
+				}
+			}
+		}
+		//username, status, divice, study-short
+		.user {
+			flex: 1; padding: 0 10px 0 20px;
+
+			.name {
+				h1.fullname {
+					font-size: 24px;
+					display: inline-block; padding: 10px 0;
+					position: relative;
+
+					&:before {
+						content: '';
+						display: inline-block; width: 10px; height: 10px;
+						position: absolute; left: -15px; top: 15px;
+						background: $color-online; border-radius: 50%;
+					}
+					&:after {
+						content: '';
+						display: inline-block; width: 20px; height: 20px;
+						background-image: url("../img/phone.svg"); background-size: cover;
+						position: absolute; right: -27px; top: 10px;
+					}
+
+				}
+			}
+			.study-short {
+				white-space: nowrap; text-overflow: ellipsis; overflow: hidden;
+				max-width: 370px;
+			}
+		}
+	}
+
+	//main slider
+	.slider {
+		position: relative;
+		background-color: rgba(0, 0, 0, 0.5);
+
+		ul {
+			li.slide {
+				overflow: hidden;
+				display: flex; justify-content: center; align-items: center; height: 575px;
+
+				img {
+					display: block; margin: 0 auto;
+						width: auto; max-width: 100%; max-height: 100%;
+				}
+				&.flower {
+					flex-direction: column;
+					position: relative;
+
+					img{
+						&.background-image {
+							max-height: 100%;
+							position: absolute;
+							filter: blur(10px);
+						}
+						&.rose {
+							max-height: 55%;
+							position: relative;
+						}
+					}
+					.background {
+						position: absolute; top: 0; bottom: 0; left: 0; right: 0;
+						background-color: rgba(0, 0, 255, 0.6);
+					}
+					p {
+						color: $color-white; font-size: 18px;
+						margin-bottom: 10px;
+						position: relative;
+					}
+					a.button {
+						font-size: 20px;
+						padding: 10px 15px; margin: 10px 0;
+						position: relative;
+						background-color: $color-white; border-radius: 5px;
+						transition: color 0.2s linear, background-color 0.2s linear;
+
+						&:hover {
+							color: $color-white;
+							background-color: $color-text;
+						}
+					}
+				}
+			}
+		}
+		//slider navigation
+		a.nav {
+			font-size: 48px; cursor: pointer;
+			position: absolute; top: 50%;
+			transform: translateY(-50%);
+			text-decoration: none;
+
+			&.prev {left: 20px;}
+			&.next {right: 20px;}
+			&:active svg {
+				transform: scale(1.25);
+			}
+
+			svg {transition: transform 0.1s linear;}
+		}
+		//count photo
+		span.count {
+			color: $color-white;
+			padding: 3px 5px;
+			position: absolute; bottom: 20px; left: 20px;
+			background-color: rgba(0, 0, 0, 0.8); border-radius: 5px;
+
+			i.count-photo {
+				vertical-align: text-bottom;
+				display: inline-block; width: 25px; margin-right: 5px;
+
+				img {display: block; width: 100%;}
+			}
+		}
+		//button spam
+		a.spam {
+			color: $color-white; font-size: 20px; cursor: pointer;
+			padding: 5px 10px;
+			position: absolute;	bottom: 20px; right: 20px;
+			background-color: rgba(0, 0, 0, 0.8); border-radius: 50%;
+
+			&:hover {font-weight: 600; text-decoration: none;}
+		}
+
+		//absolute user-card
+		.user-card {
+			overflow: hidden;
+			position: absolute; top: 0; right: 0; left: 0;
+			z-index: -1;
+			background-color: $color-white;
+
+			&.show {z-index: 2;}
+
+			//carousel
+			.carousel {
+				width: 100%; height: 130px;
+				position: relative;
+
+				ul {
+					display: flex; height: 130px;
+					transition: margin-left .3s linear;
+
+					li.slide-carousel {
+						display: block; width: 114px;
+						min-width: 114px;
+
+						a {
+							cursor: pointer;
+							display: block; width: 100%; height: 100%;
+							background-size: cover; background-position: center;
+								background-repeat: no-repeat;
+
+							img {display: none; max-height: 100%;}
+						}
+					}
+				}
+				// carousel navigation
+				a.nav {
+					color: $color-gray; font-size: 20px;
+					display: block; padding: 6px 11px;
+					position: absolute; top: 50%;
+					background-color: rgba(0, 0, 0, 0.5); border-radius: 50%;
+					&.prev-carousel {left: 20px;}
+					&.next-carousel {right: 20px;}
+					&:active {font-size: 22px;}
+				}
+				//count photo
+				span.count {
+					right: 30px; left: auto; bottom: 10px;
+					background-color: rgba(0, 0, 0, 0.5);
+
+					i {margin-left: 5px; margin-right: 0px;}
+				}
+			}
+
+			//section with info about user
+			.wr-info {
+				display: flex; padding-top: 10px;
+
+				//info user
+				.info {
+					max-width: 65%; padding: 0 30px;
+					border-right: 1px solid $color-gray-border;
+
+					.study, .wish, .map {
+						padding: 10px 0;
+
+						p {
+							&.title {
+								font-size: 20px;
+								margin-bottom: 12px;
+							}
+							&.text {
+								font-size: 13px;
+								margin-bottom: 10px;
+							}
+						}
+					}
+					//study user
+					.study {}
+					//location user
+					.map {
+						.looking {
+							width: 100%; height: 150px; margin-bottom: 10px;
+							position: relative;
+
+							.map-info {
+								text-align: center;
+								padding: 20px;
+								position: absolute; z-index: 2;
+									top: 0; bottom: 0; right: 0; left: 0;
+
+
+								.map-info-text {
+									height: 100%;
+									background-color: $color-white;
+
+									p {
+										font-size: 16px;
+										padding: 15px 0 25px;
+									}
+									a.button-map {
+										color: $color-white; font-size: 14px; cursor: pointer;
+										padding: 15px;
+										position: static;
+										background-color: $color-brand; border-radius: 5px; border: 1px solid $color-brand;
+										transition: color .2s linear, background-color .2s linear, border-color .2s linear;
+
+										i {
+											display: inline-block; width: 10px; height: 15px; margin-right: 10px;
+											background-color: $color-white;
+										}
+										&:hover {
+											text-decoration: none;
+											background-color: $color-orange; border-color: $color-orange;
+										}
+										&:active {
+											color: $color-brand;
+											background-color: $color-white;
+										}
+									}
+								}
+							}
+						}
+					}
+					//wish user
+					.wish {}
+				}
+
+				//contact user
+				.contacts {
+					max-width: 35%; padding: 0 15px;
+
+					.block-contact {
+						padding: 15px 0 20px;
+
+						div {
+							margin-left: 50px;
+
+							&.method {}
+							&.status {}
+						}
+						p.title {
+							font-size: 18px;
+							margin-bottom: 10px;
+						}
+						i {
+							display: inline-block; width: 30px; height: 30px;
+							float: left;
+						}
+					}
+					.rating {}
+					.speeking {}
+					.verification {
+						ul {
+							li {}
+							li + li {margin-top: 15px;}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	//key navigation on page
+	.navigation {
+		ul {
+			display: flex; justify-content: space-around; padding: 20px;
+
+			li {
+				i {
+					padding: 5px 10px; margin-right: 5px;
+					border: 1px solid $color-gray-border; border-radius: 7px;
+
+					img {vertical-align: text-bottom;}
+				}
+			}
+		}
+	}
+}
+
+//rigth section with friend
+.friends {
+	flex: 1; padding-top: 30px;
+
+	ul {
+		li {
+			&.active {}
+
+			a {
+				display: block; padding: 0 7px;
+				position: relative;
+
+				&:after {
+					content: "";
+					width: 10px; height: 10px;
+					position: absolute; bottom: 10px; right: 17px;
+					background-color: $color-online; border-radius: 50%;
+				}
+
+				img {
+					width: 40px; margin: 3px;
+					border-radius: 50%;
+				}
+			}
+		}
+	}
+}
