@@ -7,15 +7,15 @@ function showDivs(n) {
 	var slides = document.getElementsByClassName("slide");
 	var count = document.getElementById("count");
 
-	if (n > slides.length) {slideIndex = 1}
-	if (n < 1) {slideIndex = slides.length}
+	if (n > slides.length) {n = 1}
+	if (n < 1) {n = slides.length}
 	for (i = 0; i < slides.length; i++) {
 		slides[i].style.display = "none";
 	}
 	//скрываем все слайды кроме первого
-	slides[slideIndex-1].style.display = "flex";
+	slides[n-1].style.display = "flex";
 
-	if (slideIndex == slides.length) {
+	if (n == slides.length) {
 		//для последнего слайда берём картинку с прошлого слайда
 		slides[i-1].querySelector('.background-image').setAttribute('src', slides[i-2].querySelector('img').getAttribute('src'));
 
@@ -25,7 +25,7 @@ function showDivs(n) {
 	} else {
 		//показываем счётчик и кнопку спама
 		document.getElementById("count").innerHTML = '<i class="count-photo"><img src="img/photo1.svg" alt="photo"></i>'
-			 + slideIndex+'/'+(slides.length-1);
+			 + n+'/'+(slides.length-1);
 		document.getElementById("count").style.display = 'inline';
 		document.getElementById("spam").innerHTML = 'P';
 		document.getElementById("spam").style.display = 'inline';
@@ -147,6 +147,11 @@ carousel.querySelector('.next-carousel').onclick = function() {
 var elements = carousel.querySelectorAll('.slide-carousel');
 for (var i = 0; i < elements.length; i++) {
 	elements[i].onclick = function() {
+		for (var key in elements) {
+			if (elements[key] == this) {
+				showDivs(+key+1);
+			}
+		}
 		document.getElementById("user-card").classList.remove("show");
 		document.querySelector('.icon-profile').classList.toggle("nocheck");
 	};
